@@ -11,6 +11,30 @@ public static class ArraySelector
 
     private static int[] ListSelector(int[] list1, int[] list2, int[] select)
     {
-        return [];
+        // Create a new array using the select aarray to determine
+        // which list to select from.
+        int[] result = new int[select.Length];
+        int list1Index = 0;
+        int list2Index = 0;
+        if (list1.Length + list2.Length < select.Length)
+        {
+            throw new ArgumentException("Select array is larger than the combined length of the two lists.");
+        }
+        for (int i = 0; i < select.Length; i++)
+        {
+            if (select[i] == 1)
+            {
+                result[i] = list1[list1Index++];
+            }
+            else if (select[i] == 2)
+            {
+                result[i] = list2[list2Index++];
+            }
+            else
+            {
+                throw new ArgumentException("Select array must contain only 1 or 2.");
+            }
+        }
+        return result;
     }
 }
